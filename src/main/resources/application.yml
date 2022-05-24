@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/user_center
+    url: jdbc:mysql://localhost:3306/user_center?serverTimezone=UTC
     hikari:
       username: root
       password: root
@@ -9,9 +9,13 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+#        namespace: 948ea1d8-4d45-46c0-85ba-0bd09d4244c3
+        cluster-name: BJ
   application:
     name: user-center
 
 server:
-  port: 8081
+  port: 8080
+
+
 
