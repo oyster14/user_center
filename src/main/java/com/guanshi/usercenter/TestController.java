@@ -17,12 +17,17 @@ public class TestController {
     @GetMapping("/test")
     public User testInsert() {
         User user = new User();
+        user.setWxNickname("asdfadsff");
         user.setAvatarUrl("xxx");
-        user.setWxNickname("adfadsasdfadsff");
         user.setBonus(100);
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
         this.userMapper.insertSelective(user);
+        return user;
+    }
+
+    @GetMapping("/q")
+    public User query(User user) {
         return user;
     }
 }
