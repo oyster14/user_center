@@ -25,4 +25,9 @@ public class TestController {
         this.userMapper.insertSelective(user);
         return user;
     }
+
+    @GetMapping("/q")
+    public User query(User user) {
+        return user;
+    }
 }
