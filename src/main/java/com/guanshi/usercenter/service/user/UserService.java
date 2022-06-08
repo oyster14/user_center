@@ -30,26 +30,26 @@ public class UserService {
         return this.userMapper.selectAll();
     }
 
-    @Transactional(rollbackFor = Exception.class)
-    public void addBonus(UserAddBonusMsgDTO userAddBonusMsgDTO) {
-        // 1. 为用户加积分
-        Integer userId = userAddBonusMsgDTO.getUserId();
-        Integer bonus = userAddBonusMsgDTO.getBonus();
-        User user = this.userMapper.selectByPrimaryKey(userId);
-
-        user.setBonus(user.getBonus() + bonus);
-        this.userMapper.updateByPrimaryKeySelective(user);
-
-        // 2. 记录日志到bonus_event_log表里面
-        this.bonusEventLogMapper.insert(
-                BonusEventLog.builder()
-                        .userId(userId)
-                        .value(bonus)
-                        .event(userAddBonusMsgDTO.getEvent())
-                        .createTime(new Date())
-                        .description(userAddBonusMsgDTO.getDescription())
-                        .build()
-        );
-        log.info("积分添加完毕...");
-    }
+//    @Transactional(rollbackFor = Exception.class)
+//    public void addBonus(UserAddBonusMsgDTO userAddBonusMsgDTO) {
+//        // 1. 为用户加积分
+//        Integer userId = userAddBonusMsgDTO.getUserId();
+//        Integer bonus = userAddBonusMsgDTO.getBonus();
+//        User user = this.userMapper.selectByPrimaryKey(userId);
+//
+//        user.setBonus(user.getBonus() + bonus);
+//        this.userMapper.updateByPrimaryKeySelective(user);
+//
+//        // 2. 记录日志到bonus_event_log表里面
+//        this.bonusEventLogMapper.insert(
+//                BonusEventLog.builder()
+//                        .userId(userId)
+//                        .value(bonus)
+//                        .event(userAddBonusMsgDTO.getEvent())
+//                        .createTime(new Date())
+//                        .description(userAddBonusMsgDTO.getDescription())
+//                        .build()
+//        );
+//        log.info("积分添加完毕...");
+//    }
 }

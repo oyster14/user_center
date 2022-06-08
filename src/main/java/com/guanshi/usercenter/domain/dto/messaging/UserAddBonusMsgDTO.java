@@ -19,7 +19,4 @@ public class UserAddBonusMsgDTO {
      */
     private Integer bonus;
 
-    private String description;
-
-    private String event;
 }

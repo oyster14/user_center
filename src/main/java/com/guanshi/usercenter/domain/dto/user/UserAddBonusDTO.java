@@ -15,4 +15,8 @@ public class UserAddBonusDTO {
      * 积分
      */
     private Integer bonus;
+
+    private String description;
+
+    private String event;
 }
