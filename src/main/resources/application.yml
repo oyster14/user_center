@@ -14,7 +14,20 @@ spring:
 #         NJ
 #         指定集群名称
         cluster-name: BJ
-#        metadata:
+    stream:
+      rocketmq:
+        binder:
+          name-server: localhost:9876
+      bindings:
+        input:
+          destination: add-bonus
+#          如果其他mq可以留空，rocketmq强制设置
+          group: binder-group
+#        my-input:
+#          destination: stream-my-topic
+#          group: my-group
+
+  #        metadata:
 #          instance: c
 #          haha: hehe
 #          version: v1
@@ -24,8 +37,8 @@ spring:
 server:
   port: 8081
 
-rocketmq:
-  name-server: localhost:9876
+#rocketmq:
+#  name-server: localhost:9876
 #management:
 #  endpoints:
 #    web:
@@ -34,4 +47,8 @@ rocketmq:
 #  endpoint:
 #    health:
 #      show-details: always
+logging:
+  level:
+    com.alibaba.nacos: error
+
 
