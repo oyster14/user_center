@@ -3,6 +3,7 @@ package com.guanshi.usercenter.service.user;
 import com.guanshi.usercenter.dao.bonus.BonusEventLogMapper;
 import com.guanshi.usercenter.dao.user.UserMapper;
 import com.guanshi.usercenter.domain.dto.messaging.UserAddBonusMsgDTO;
+import com.guanshi.usercenter.domain.dto.user.UserLoginDTO;
 import com.guanshi.usercenter.domain.entity.bonus.BonusEventLog;
 import com.guanshi.usercenter.domain.entity.user.User;
 import lombok.RequiredArgsConstructor;
@@ -51,5 +52,27 @@ public class UserService {
                         .build()
         );
         log.info("积分添加完毕...");
+    }
+
+    public User login(UserLoginDTO loginDTO, String openId) {
+        User user = this.userMapper.selectOne(
+                User.builder()
+                        .wxId(openId)
+                        .build()
+        );
+        if (user == null) {
+            User userToSave = User.builder()
+                    .wxId(openId)
+                    .bonus(300)
+                    .wxNickname(loginDTO.getWxNickName())
+                    .avatarUrl(loginDTO.getAvatarUrl())
+                    .roles("user")
+                    .createTime(new Date())
+                    .updateTime(new Date())
+                    .build();
+            this.userMapper.insertSelective(userToSave);
+            return userToSave;
+        }
+        return user;
     }
 }

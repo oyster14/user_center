@@ -9,17 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserAddBonusDTO {
-    /**
-     * 用户id
-     */
-    private Integer userId;
-    /**
-     * 积分
-     */
-    private Integer bonus;
-
-    private String description;
-
-    private String event;
+public class UserLoginDTO {
+    private String code;
+    private String avatarUrl;
+    private String wxNickName;
 }

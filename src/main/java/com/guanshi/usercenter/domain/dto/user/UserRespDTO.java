@@ -9,17 +9,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserAddBonusDTO {
+public class UserRespDTO {
     /**
      * 用户id
      */
-    private Integer userId;
-    /**
-     * 积分
-     */
+    private Integer id;
+    private String avatarUrl;
     private Integer bonus;
-
-    private String description;
-
-    private String event;
+    private String wxNickName;
 }
