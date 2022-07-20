@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class UserLoginDTO {
     private String code;
     private String avatarUrl;
-    private String wxNickName;
+    private String wxNickname;
 }

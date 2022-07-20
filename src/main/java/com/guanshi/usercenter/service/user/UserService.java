@@ -64,7 +64,7 @@ public class UserService {
             User userToSave = User.builder()
                     .wxId(openId)
                     .bonus(300)
-                    .wxNickname(loginDTO.getWxNickName())
+                    .wxNickname(loginDTO.getWxNickname())
                     .avatarUrl(loginDTO.getAvatarUrl())
                     .roles("user")
                     .createTime(new Date())

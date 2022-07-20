@@ -16,5 +16,5 @@ public class UserRespDTO {
     private Integer id;
     private String avatarUrl;
     private Integer bonus;
-    private String wxNickName;
+    private String wxNickname;
 }

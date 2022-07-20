@@ -3,6 +3,7 @@ package com.guanshi.usercenter.controller.user;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
+import com.guanshi.usercenter.auth.CheckLogin;
 import com.guanshi.usercenter.domain.dto.user.JwtTokenRespDTO;
 import com.guanshi.usercenter.domain.dto.user.LoginRespDTO;
 import com.guanshi.usercenter.domain.dto.user.UserLoginDTO;
@@ -30,6 +31,7 @@ public class UserController {
 
     private final JwtOperator jwtOperator;
     @GetMapping("/{id}")
+    @CheckLogin
     public User findById(@PathVariable Integer id) {
         log.info("findById 被请求了");
         return this.userService.findById(id);
@@ -41,8 +43,24 @@ public class UserController {
         return this.userService.findAllUsers();
     }
 
+    /**
+     * 模拟假的登录
+     * @param
+     * @return
+     * @throws WxErrorException
+     */
+    @GetMapping("/gen-token")
+    public String genToken() {
+        Map<String, Object> userInfo = new HashMap<>(3);
+        userInfo.put("id", 1);
+        userInfo.put("wxNickName", "汪汪汪");
+        userInfo.put("role", "user");
+        return this.jwtOperator.generateToken(userInfo);
+    }
+
+
     @PostMapping("/login")
-    public LoginRespDTO login(UserLoginDTO loginDTO) throws WxErrorException {
+    public LoginRespDTO login(@RequestBody UserLoginDTO loginDTO) throws WxErrorException {
 //        微信小程序服务端校验是否登录
         WxMaJscode2SessionResult result = this.wxMaService.getUserService()
                 .getSessionInfo(loginDTO.getCode());
@@ -61,7 +79,7 @@ public class UserController {
 
         String token = jwtOperator.generateToken(userInfo);
         log.info("用户：{}登录成功， 生成的token：{}，有效期到：{}",
-                loginDTO.getWxNickName(),
+                loginDTO.getWxNickname(),
                 token,
                 jwtOperator.getExpirationDateFromToken(token)
         );
@@ -72,7 +90,7 @@ public class UserController {
                                 .id(user.getId())
                                 .avatarUrl(user.getAvatarUrl())
                                 .bonus(user.getBonus())
-                                .wxNickName(user.getWxNickname())
+                                .wxNickname(user.getWxNickname())
                                 .build()
                 )
                 .token(
