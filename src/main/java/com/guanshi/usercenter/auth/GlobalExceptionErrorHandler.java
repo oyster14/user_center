@@ -1,6 +1,5 @@
 package com.guanshi.usercenter.auth;
 
-import com.guanshi.usercenter.security.SecurityException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +18,7 @@ public class GlobalExceptionErrorHandler {
         log.warn("发生SecurityException", e);
         return new ResponseEntity<ErrorBody>(
                 ErrorBody.builder()
-                        .body("Token不合法!~用户不允许访问")
+                        .body(e.getMessage())
                         .status(HttpStatus.UNAUTHORIZED.value())
                         .build(),
                 HttpStatus.UNAUTHORIZED
