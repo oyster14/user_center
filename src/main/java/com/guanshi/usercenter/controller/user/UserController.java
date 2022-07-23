@@ -3,6 +3,7 @@ package com.guanshi.usercenter.controller.user;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
+import com.guanshi.usercenter.auth.CheckLogin;
 import com.guanshi.usercenter.domain.dto.user.JwtTokenRespDTO;
 import com.guanshi.usercenter.domain.dto.user.LoginRespDTO;
 import com.guanshi.usercenter.domain.dto.user.UserLoginDTO;
@@ -30,6 +31,7 @@ public class UserController {
 
     private final JwtOperator jwtOperator;
     @GetMapping("/{id}")
+    @CheckLogin
     public User findById(@PathVariable Integer id) {
         log.info("findById 被请求了");
         return this.userService.findById(id);

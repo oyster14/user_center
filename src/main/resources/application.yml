@@ -33,10 +33,19 @@ spring:
 #          version: v1
   application:
     name: user-center
+  zipkin:
+    base-url: http://localhost:9411
+#    discoveryClientEnabled: false
+  sleuth:
+    sampler:
+      probability: 1.0
 
 server:
   port: 8081
-
+logging:
+  level:
+    com.alibaba.nacos: error
+    org.springframework.cloud.sleuth: debug
 #rocketmq:
 #  name-server: localhost:9876
 #management:
@@ -47,13 +56,11 @@ server:
 #  endpoint:
 #    health:
 #      show-details: always
-logging:
-  level:
-    com.alibaba.nacos: error
 
 jwt:
   secret: aksdbkasdhglashdlghfalsdhflahdls
   # 有效期，单位秒，默认2周
   expire-time-in-second: 1209600
+
 
 
