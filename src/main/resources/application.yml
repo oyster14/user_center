@@ -1,18 +1,14 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/user_center?serverTimezone=GMT%2B8
+    url: 
     hikari:
-      username: root
-      password: root
+      username: 
+      password: 
       driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
-#         指定namespace
-#         namespace: 56116141-d837-4d15-8842-94e153bb6cfb
-#         NJ
-#         指定集群名称
         cluster-name: BJ
     stream:
       rocketmq:
@@ -21,7 +17,6 @@ spring:
       bindings:
         input:
           destination: add-bonus
-#          如果其他mq可以留空，rocketmq强制设置
           group: binder-group
 #        my-input:
 #          destination: stream-my-topic
@@ -58,8 +53,7 @@ logging:
 #      show-details: always
 
 jwt:
-  secret: aksdbkasdhglashdlghfalsdhflahdls
-  # 有效期，单位秒，默认2周
+  secret: 
   expire-time-in-second: 1209600
 management:
   endpoints:
